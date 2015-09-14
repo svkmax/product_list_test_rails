@@ -54,8 +54,6 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  # scope constraints: { format: :json }, defaults: { format: :json } do
     resources :products, only: [:index, :update]
-  # end
     match '*path', :to => 'application#invalid_route', via: [:all]
 end

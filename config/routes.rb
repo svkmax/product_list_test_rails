@@ -55,5 +55,6 @@ Rails.application.routes.draw do
   #   end
 
     resources :products, only: [:index, :update]
+    get 'products/count' => 'products#count'
     match '*path', :to => 'application#invalid_route', via: [:all]
 end

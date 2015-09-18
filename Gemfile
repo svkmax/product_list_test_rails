@@ -55,3 +55,4 @@ group :test do
 end
 
 gem 'factory_girl_rails'
+gem 'will_paginate', '~> 3.0.6'

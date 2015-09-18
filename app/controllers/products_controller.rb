@@ -2,7 +2,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:update]
 
   def index
-    render json: Product.all
+    render json: {products: Product.paginate(:page => params[:page_number], :per_page => params[:per_page]), total: Product.count}
+  end
+
+  def count
+    render json: Product.count
   end
 
   def update

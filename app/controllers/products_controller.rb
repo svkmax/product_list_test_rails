@@ -2,16 +2,16 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:update]
 
   def index
-    render json: {products: Product.paginate(:page => params[:page_number],
-                                             :per_page => params[:per_page]),
-                  total: Product.count}
+    render json: { products: Product.paginate(page: params[:page_number],
+                                             per_page: params[:per_page]),
+                  total: Product.count }
   end
 
   def filter
-    scope = Product.where("category like ?", "%#{params[:filter]}%")
-    render json: {products: scope.paginate(:page => params[:page_number],
-                                           :per_page => params[:per_page]),
-                  total: scope.count}
+    scope = Product.where('category like ?', "%#{params[:filter]}%")
+    render json: { products: scope.paginate(page: params[:page_number],
+                                           per_page: params[:per_page]),
+                  total: scope.count }
   end
 
   def count
@@ -19,7 +19,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    render @product.update(update_params) ? {json: @product} : {json: @product.reload, status: :unprocessable_entity}
+    render @product.update(update_params) ? { json: @product } : { json: @product.reload,
+                                                                   status: :unprocessable_entity }
   end
 
   private
@@ -31,5 +32,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
 end

@@ -54,7 +54,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-    resources :products, only: [:index, :update]
-    get 'products/count' => 'products#count'
+    resources :products, only: [:index, :update] do
+      collection do
+        get 'count'
+        get 'filter'
+      end
+    end
     match '*path', :to => 'application#invalid_route', via: [:all]
 end

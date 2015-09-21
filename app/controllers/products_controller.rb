@@ -5,6 +5,11 @@ class ProductsController < ApplicationController
     render json: {products: Product.paginate(:page => params[:page_number], :per_page => params[:per_page]), total: Product.count}
   end
 
+  def filter
+    scope = Product.where("category like ?", "%#{params[:filter]}%")
+    render json: {products: scope.paginate(:page => params[:page_number], :per_page => params[:per_page]), total: scope.count }
+  end
+
   def count
     render json: Product.count
   end
